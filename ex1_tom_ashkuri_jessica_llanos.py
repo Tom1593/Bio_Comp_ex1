@@ -5,7 +5,7 @@ import sys
 import collections as col
 
 
-def read_motif_from_file():
+def read_motif_from_file():   # read the sub graphs from the file
     fd = open("subgraphs.txt", 'r')
     motif_list = []
     line = fd.readline()
@@ -32,13 +32,13 @@ def find_motif(n):
                 u_graph.append(edge)
 
     user_graph = nx.DiGraph()
-    user_graph.add_edges_from(u_graph)
+    user_graph.add_edges_from(u_graph)   # making a graph out of the edges entered
     sub_graphs(n)                        # create motif list
     motif_list = read_motif_from_file()  # take the list
     motif_dict = col.OrderedDict()       # the list in alphabetic order
     g_motif_list = []
     for motif in motif_list:             # initialize motif list
-        #trun motif to graph format
+        # trun motif to graph format
         motif_graph = nx.DiGraph()
         motif_graph.add_edges_from(motif)
         g_motif_list.append(motif_graph)
@@ -56,7 +56,7 @@ def find_motif(n):
     print_motif_to_file(g_motif_list, n, motif_dict)
 
 
-def print_motif_to_file(g_motif_list, n, motif_dict):
+def print_motif_to_file(g_motif_list, n, motif_dict):  # printing to txt all the sub graphs and the count of appearance
     if os.path.exists("motif_subgraphs.txt"):
         os.remove("motif_subgraphs.txt")
     fd = open("motif_subgraphs.txt", 'a+')
@@ -65,7 +65,7 @@ def print_motif_to_file(g_motif_list, n, motif_dict):
     i = 1
     for motif in g_motif_list:
         print(f"#{i}")
-        # turn motif to graph format
+
         print(f"count = {motif_dict[motif]}")
         print(motif.edges)
         i += 1
@@ -92,7 +92,7 @@ def sub_graphs(n):
     nodes = [node for node in range(1, n + 1)]  # nodes = 1,2,3,...,n
     complete_graph_edges = list(itr.permutations(nodes, 2))	 # all node pair permutations
     complete_graph = nx.DiGraph()
-    complete_graph.add_edges_from(complete_graph_edges)
+    complete_graph.add_edges_from(complete_graph_edges)  # making the graph with all the connections
 
     unique_graphs = [complete_graph]
     for size in range(n - 1, len(complete_graph_edges) + 1):
