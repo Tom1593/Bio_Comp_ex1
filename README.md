@@ -1,6 +1,7 @@
 # Bio_Comp_ex1
 the code for the assignment
 the code can do both questions 
+
 q1:
 enter 1 when promted
 and write a number n positive integer(num of vertecies)
